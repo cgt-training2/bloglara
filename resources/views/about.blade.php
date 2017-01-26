@@ -38,9 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
-
-                <div class="title">Hello Mr. {{$fullname}}</div>
-
+                <div class="title">About{{}}</div>
             </div>
         </div>
     </body>

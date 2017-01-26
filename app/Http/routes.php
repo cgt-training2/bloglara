@@ -11,6 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::group(['middleware' => ['web']], function () {
+	
+	Route::get('/', 'PagesController@getIndex');// return view('welcome'););
+
+	Route::get('about', 'PagesController@getAbout');
+
+	Route::get('contact','PagesController@getContact');
+
+	Route::resource('posts','PostsController');
+// });	
+

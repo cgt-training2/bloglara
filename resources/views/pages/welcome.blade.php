@@ -13,43 +13,22 @@
       <!-- end of header .row -->
 
       <div class="row">
-        <div class="col-md-8">
-          <div class="post">
-            <h3>Post Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis amet tenetur eum, consequuntur assumenda officiis quidem omnis placeat. Sequi ex fugiat reiciendis at eligendi inventore ad, odio magnam velit doloribus...</p>
-            <a href="#" class="btn btn-primary">Read More</a>
-          </div>
+          @foreach ($posts as $post)
+            
+            <div class="post col-md-8">
+              <h3>{{$post->title}}</h3>
+              <p>{{$post->body}}</p>
 
-          <hr>
+            </div>
 
-          <div class="post">
-            <h3>Post Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis amet tenetur eum, consequuntur assumenda officiis quidem omnis placeat. Sequi ex fugiat reiciendis at eligendi inventore ad, odio magnam velit doloribus...</p>
-            <a href="#" class="btn btn-primary">Read More</a>
-          </div>
+          @endforeach
+            
 
-          <hr>
-
-          <div class="post">
-            <h3>Post Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis amet tenetur eum, consequuntur assumenda officiis quidem omnis placeat. Sequi ex fugiat reiciendis at eligendi inventore ad, odio magnam velit doloribus...</p>
-            <a href="#" class="btn btn-primary">Read More</a>
-          </div>
-
-          <hr>
-
-          <div class="post">
-            <h3>Post Title</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis amet tenetur eum, consequuntur assumenda officiis quidem omnis placeat. Sequi ex fugiat reiciendis at eligendi inventore ad, odio magnam velit doloribus...</p>
-            <a href="#" class="btn btn-primary">Read More</a>
-          </div>
-
-          <hr>
-        </div>
 
         <div class="col-md-3 col-md-offset-1">
           <h2>Sidebar</h2>
         </div>
       </div>
+    </div> <!-- end of .row -->
 
 @endsection

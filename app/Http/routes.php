@@ -11,11 +11,16 @@
 |
 */
 
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 // Route::group(['middleware' => ['web']], function () {
 	
+	Route::get('/blog/{slug}',['as' => 'blogs.single', 'uses'=> 
+		'BlogController@getSingle'])->where('slug','[\w\d\-\_]+');
+
 	Route::get('/', 'PagesController@getIndex');// return view('welcome'););
 
 	Route::get('about', 'PagesController@getAbout');
@@ -24,3 +29,4 @@
 
 	Route::resource('posts','PostsController');
 // });	
+

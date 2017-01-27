@@ -6,13 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Post;
+
 class PagesController extends Controller
 {
     public function getIndex(){
-    	$first="Vaibhav";
-    	$last="Sharma";
-    	$fullname=$first." ".$last;
-    	return view('pages.welcome')->withFullname($fullname);
+
+    	$posts=Post::orderBy('created_at','desc')->limit(4)->get();
+    	return view('pages.welcome')->withPosts($posts);
+
+    	// $first="Vaibhav";
+    	// $last="Sharma";
+    	// $fullname=$first." ".$last;
+    	// return view('pages.welcome')->withFullname($fullname);
     	// return view('welcome')->with('fullname',$fullname);
     	// return view('welcome')->withFullname($fullname);
 

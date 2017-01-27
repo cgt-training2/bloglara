@@ -73,7 +73,8 @@ class PostsController extends Controller
 
         // print_r(Session::has('success'));exit();
         //
-         return view('posts.show');
+        $post=Post::find($id);
+         return view('posts.show')->withPost($post);
     }
 
     /**

@@ -47,7 +47,6 @@
 
 						[],['class'=>'btn btn-default btn-block'])}}
 					</div>	
-
 				</div>
 			</div>
 		</div>

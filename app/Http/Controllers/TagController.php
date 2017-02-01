@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Category;
+use App\Tag;
 
 use Session;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
 
     public function __construct() {
@@ -24,8 +24,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
-        return view('categories.index')->withCategories($categories);
+
+        $tags = Tag::all();
+        return view('tags.index')->withTags($tags);
     }
 
     /**
@@ -47,14 +48,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, array(
-            'name' => 'required|max:255'
-        ));
-        $category = new Category;
-        $category->name = $request->name;
-        $category->save();
-        Session::flash('success', 'New Category has been created');
-        return redirect()->route('categories.index');
+        $this->validate($request, array('name' => 'required|max:255'));
+        $tag = new Tag;
+        $tag->name = $request->name;
+        $tag->save();
+        Session::flash('success', 'New Tag was successfully created!');
+        return redirect()->route('tags.index');
     }
 
     /**
@@ -86,7 +85,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         //
     }
 

@@ -47,5 +47,7 @@
 	Route::resource('posts','PostsController');
 
 	Route::resource('categories','CategoryController');
+
+	Route::resource('tags','TagController');
 // });	
 

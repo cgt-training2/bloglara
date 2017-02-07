@@ -14,17 +14,21 @@ use App\Http\Requests;
 
 use Session;
 
-class PostsController extends Controller
-{
+use Purifier;
+
+
+class PostsController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
+    public function __construct() {
+
         $this->middleware('auth', ['except' => 'index']);
+
     } 
 
     public function index() {
@@ -38,12 +42,15 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create() {
+        
         //
         $categories = Category::all();
         $tags = Tag::all();
         return view('posts.create')->withCategories($categories)
         ->withTags($tags);
+
     }
 
     /**
@@ -66,7 +73,7 @@ class PostsController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
-        $post->body = $request->body;
+        $post->body = Purifier::clean($request->body);
         // if ($request->hasFile('featured_img')) {
         //   $image = $request->file('featured_img');
         //   $filename = time() . '.' . $image->getClientOriginalExtension();
@@ -114,7 +121,7 @@ class PostsController extends Controller
         // find the post in the database and save as a var
         $post = Post::find($id);
         $categories = Category::all();
-        $cats = array();
+        $cats = [];
         foreach ($categories as $category) {
             $cats[$category->id] = $category->name;
         }
@@ -163,7 +170,7 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
-        $post->body = $request->input('body');
+        $post->body = Purifier::clean($request->input('body'));
 
         $post->save();
 

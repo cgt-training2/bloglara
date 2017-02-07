@@ -6,6 +6,16 @@
 	
 	
 	{!! Html::style('css/select2.min.css') !!}
+	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+	<script>
+		tinymce.init({
+			selector: 'textarea',
+			plugins: 'link code',
+			menubar: false
+		});
+	</script>
+
 
 @endsection
 
@@ -18,7 +28,7 @@
 			{{ Form::text('title', null, ["class" => 'form-control input-lg']) }}
 			
 			{{ Form::label('slug', "Slug:", ['class' => 'form-spacing-top']) }}
-			{{ Form::textarea('slug', null, ['class' => 'form-control']) }}
+			{{ Form::text('slug', null, ['class' => 'form-control']) }}
 
 			{{ Form::label('category_id', "Category:", ['class' => 'form-spacing-top']) }}
 			{{ Form::select('category_id', $categories, null, ['class' => 'form-control']) }}

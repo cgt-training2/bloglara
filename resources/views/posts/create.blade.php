@@ -49,6 +49,9 @@
 
 				</select>
 
+				{{ Form::label('featured_img', 'Upload a Featured Image') }}
+				{{ Form::file('featured_img') }}
+
 				{{ Form::label('body', "Post Body:") }}
 				{{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '')) }}
 

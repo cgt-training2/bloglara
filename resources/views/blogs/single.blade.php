@@ -5,12 +5,14 @@
 @section('content')
 	
 	<div class="row">
-		 <div class="col-md-8 col-md-offset-2">
+		<div class="col-md-8 col-md-offset-2">
+
+			<img src="{{asset('/images/' .$post->image)}}" width="80" height="40" />
 
 		 	<h1>{{$post->title}}</h1>
 		 	<p>{!! $post->body !!}</p>
 
-		 </div>	
+		</div>	
 		 <hr>
 		 <p>Posted In: {{$post->category->name}}</p>
 

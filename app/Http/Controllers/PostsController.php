@@ -16,6 +16,10 @@ use Session;
 
 use Purifier;
 
+use Image;
+
+use Storage;
+
 
 class PostsController extends Controller {
 
@@ -66,7 +70,8 @@ class PostsController extends Controller {
             'title'         => 'required|max:255',
             'slug'         => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'category_id'   => 'required|integer',
-            'body'          => 'required'
+            // 'body'          => 'required'
+            'featured_img' => 'sometimes|image'
         ));
         // store in the database
         $post = new Post;
@@ -74,13 +79,14 @@ class PostsController extends Controller {
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->body = Purifier::clean($request->body);
-        // if ($request->hasFile('featured_img')) {
-        //   $image = $request->file('featured_img');
-        //   $filename = time() . '.' . $image->getClientOriginalExtension();
-        //   $location = public_path('images/' . $filename);
-        //   Image::make($image)->resize(800, 400)->save($location);
-        //   $post->image = $filename;
-        // }
+
+        if ($request->hasFile('featured_img')) {
+          $image = $request->file('featured_img');
+          $filename = time() . '.' . $image->getClientOriginalExtension();
+          $location = public_path('images/' . $filename);
+          Image::make($image)->resize(80, 40)->save($location);
+          $post->image = $filename;
+        }
         $post->save();
 
         $post->tags()->sync($request->tags, false);
@@ -153,15 +159,17 @@ class PostsController extends Controller {
             $this->validate($request, array(
                     'title' => 'required|max:255',
                     'category_id' => 'required|integer',
-                    'body'  => 'required'
+                    'body'  => 'required',
+                    // 'featured_img' => 'image',
                 ));
         } else{
 
             $this->validate($request, array(
                     'title' => 'required|max:255',
-                    'slug'         => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                    'slug'         => 'required|alpha_dash|min:5|max:255|unique:posts,slug,$id',
                     'category_id' => 'required|integer',
-                    'body'  => 'required'
+                    'body'  => 'required',
+                    // 'featured_img' => 'image',
                 ));
         }   
         // Save the data to the database
@@ -171,6 +179,24 @@ class PostsController extends Controller {
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
         $post->body = Purifier::clean($request->input('body'));
+
+        // print_r($oldimage);exit();
+        if ($request->hasFile('featured_img')) {
+          $image = $request->file('featured_img');
+          $filename = time() . '.' . $image->getClientOriginalExtension();
+          $location = public_path('images/' . $filename);
+          Image::make($image)->resize(80, 40)->save($location);
+          $oldimage=$post->image;
+
+           // print_r($oldimage);exit();
+
+          //Update the database.
+          $post->image = $filename;
+
+          // Delete the file from storage.
+
+          Storage::delete($oldimage);
+        }
 
         $post->save();
 
@@ -201,6 +227,10 @@ class PostsController extends Controller {
         $post = Post::find($id);
 
         $post->tags()->detach();
+
+        // Delete the file from storage.
+
+        Storage::delete($post->image);
 
         $post->delete();
 

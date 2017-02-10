@@ -19,7 +19,9 @@ class BlogController extends Controller
     //
     public function getSingle($slug){
 
+
     	$post=Post::where('slug','=',$slug)->first();
+        // print_r($post['image']);exit();
     	return view('blogs.single')->withPost($post);
     	// return $slug;
     }

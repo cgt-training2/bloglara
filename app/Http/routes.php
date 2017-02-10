@@ -23,17 +23,22 @@
 
 	// Authentication Routes
 	Route::get('auth/login', ['as'=>'login', 'uses'=>'Auth\AuthController@getLogin']);
+
 	Route::post('auth/login', 'Auth\AuthController@postLogin');
+	
 	Route::get('auth/logout', ['as'=>'logout', 'uses'=>'Auth\AuthController@getLogout']);
 
 	// Password Reset Routes
 	Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+
 	Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+
 	Route::post('password/reset', 'Auth\PasswordController@reset');
 
 
 	// Registration Routes
 	Route::get('auth/register', ['as'=>'register', 'uses'=>'Auth\AuthController@getRegister']);
+
 	Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 	Route::get('blog', 'BlogController@getIndex');
@@ -49,9 +54,13 @@
 	Route::resource('posts','PostsController');
 
 	Route::post('comments/{post_id}', ['uses' => 'CommentController@store', 'as' => 'comments.store']);
+
 	Route::get('comments/{id}/edit', ['uses' => 'CommentController@edit', 'as' => 'comments.edit']);
+
 	Route::put('comments/{id}', ['uses' => 'CommentController@update', 'as' => 'comments.update']);
+
 	Route::delete('comments/{id}', ['uses' => 'CommentController@destroy', 'as' => 'comments.destroy']);
+
 	Route::get('comments/{id}/delete', ['uses' => 'CommentController@delete', 'as' => 'comments.delete']);
 
 	Route::resource('categories','CategoryController');

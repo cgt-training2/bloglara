@@ -47,8 +47,7 @@ class PostsController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function create() {
-        
+    public function create() {  
         //
         $categories = Category::all();
         $tags = Tag::all();
@@ -87,6 +86,7 @@ class PostsController extends Controller {
           Image::make($image)->resize(80, 40)->save($location);
           $post->image = $filename;
         }
+
         $post->save();
 
         $post->tags()->sync($request->tags, false);
@@ -236,5 +236,6 @@ class PostsController extends Controller {
 
         Session::flash('success', 'The post was successfully deleted.');
         return redirect()->route('posts.index');
+        
     }
 }

@@ -40,8 +40,12 @@
 							<td>{{ $comment->email }}</td>
 							<td>{{ $comment->comment }}</td>
 							<td>
-								<a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-								<a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+								
+									<a href="{{ route('comments.edit', $comment->id) }}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+								
+								
+									<a href="{{ route('comments.delete', $comment->id) }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+								
 							</td>
 						</tr>
 						@endforeach
@@ -69,16 +73,20 @@
 				</dl>
 				<hr>
 				<div class="row">
-					<div class="col-sm-6">
-						{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
-					</div>
-					<div class="col-sm-6">
-						{!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
+					@can('edit_post')
+						<div class="col-sm-6">
+							{!! Html::linkRoute('posts.edit', 'Edit', array($post->id), array('class' => 'btn btn-primary btn-block')) !!}
+						</div>
+					@endcan	
+					@can('delete_post')	
+						<div class="col-sm-6">
+							{!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE']) !!}
 
-						{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+							{!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
 
-						{!! Form::close() !!}
-					</div>
+							{!! Form::close() !!}
+						</div>
+					@endcan	
 				</div>
 				<div class="row">
 					<div class="col-md-12" style="margin-top:15px;">
@@ -90,5 +98,4 @@
 			</div>
 		</div>
 	</div>
-	
 @endsection

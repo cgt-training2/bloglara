@@ -12,7 +12,7 @@
     <!-- Bootstrap -->
     
     {{ Html::style('css/bootstrap.min.css') }}
-    {{ Html::style('css/styles.css') }}
+    {{ Html::style('css/mystyles.css') }}
     @yield('stylesheet')
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

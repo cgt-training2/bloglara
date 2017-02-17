@@ -11,8 +11,21 @@
 |
 */
 
+	// Route::get('/admin', function(){
 
+	// 	return view('admin.login');
+	// });
+	
+	Route::get('/admin','Adminauth\AuthController@showLoginForm');
+	Route::post('admin/login', 'Adminauth\AuthController@postLogin');	
 
+	// Route::group(['before' => 'admin', 'after' => 'no-cache'], function(){
+	Route::group(['middleware' => ['admin']], function () {
+
+		Route::get('/dashboard','Admin\AdminController@dashboard');
+		Route::get('admin/logout','Adminauth\AuthController@logout');
+
+	});
 // Route::get('/', function () {
 //     return view('welcome');
 // });

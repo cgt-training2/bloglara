@@ -35,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
                 $permission->name,function($user) use($permission){
 
                     return $user->hasRole($permission->roles);
+                    
             });
         }
     }

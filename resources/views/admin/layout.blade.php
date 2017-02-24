@@ -60,12 +60,8 @@
 	
     {!! Html::style('css/jquery-ui-1.10.4.min.css') !!}
 
-    <!-- =======================================================
-        Theme Name: NiceAdmin
-        Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-        Author: BootstrapMade
-        Author URL: https://bootstrapmade.com
-    ======================================================= -->
+    @yield('stylesheet')
+
   </head>
 
   <body>
@@ -76,9 +72,17 @@
 
             @include('admin.partials._header')
 
+            <p>helloooooooo</p>
+
             @include('admin.partials._sidebar')
 
-            @yield('content')
+            <section id="main-content">
+                <section class="wrapper">    
+
+                    @yield('content')
+
+                </section>
+            </section>        
 
         @else    
 
@@ -156,5 +160,7 @@
 
     {{ Html::script('js/jquery.slimscroll.min.js') }}
 
+    @yield('scripts')
+    
   </body>
 </html>

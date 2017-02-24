@@ -22,19 +22,18 @@ class AuthController extends Controller {
         if(Auth::guard('admin')->check()) {
 
             return redirect('/dashboard');
+
         }
 
         return view('admin.login');
-    }
 
+    }
+    
     public function logout(){
 
-       
         Auth::guard('admin')->logout();
         Session::flush();
         return redirect('/admin');
+
     }
-
-
-
 }

@@ -24,8 +24,11 @@
 
 		Route::get('/dashboard','Admin\AdminController@dashboard');
 		Route::get('admin/logout','Adminauth\AuthController@logout');
+		Route::resource('admin/posts','Admin\PostController');
+
 
 	});
+	
 // Route::get('/', function () {
 //     return view('welcome');
 // });
